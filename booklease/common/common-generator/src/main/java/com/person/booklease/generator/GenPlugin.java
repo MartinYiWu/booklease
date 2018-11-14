@@ -50,8 +50,8 @@ public class GenPlugin extends PluginAdapter {
                 typeName = "Long";
             }
         }
-        //引入cn.hejinyo.base.BaseDao
-        interfaze.addImportedType(new FullyQualifiedJavaType("com.hqjy.mustang.common.base.base.BaseDao"));
+        //引入com.person.booklease.common.base.base.BaseDao
+        interfaze.addImportedType(new FullyQualifiedJavaType("com.person.booklease.common.base.base.BaseDao"));
         // 添加base接口 extends BaseDao<User>
         interfaze.addSuperInterface(new FullyQualifiedJavaType("BaseDao<" + introspectedTable.getBaseRecordType() + "," + typeName + ">"));
         // 添加@Mapper注解
