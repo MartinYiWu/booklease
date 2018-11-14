@@ -10,12 +10,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * String工具类
+ * 功能描述: String工具类
  *
- * @author : heshuangshuang
- * @date : 2018/1/19 14:15
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
-
 public final class StringUtils {
     private StringUtils() {
         throw new Error("工具类不能实例化！");
@@ -339,7 +339,7 @@ public final class StringUtils {
      * @return 返回部门加密的手机字符串
      */
     public static String encryptPhone(String phone) {
-        if (isNotEmpty(phone)){
+        if (isNotEmpty(phone)) {
             StringBuilder sb = new StringBuilder(phone);
             return sb.replace(3, 5, "**").toString();
         }

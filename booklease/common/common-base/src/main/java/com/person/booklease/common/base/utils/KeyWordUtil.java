@@ -7,8 +7,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author : heshuangshuang
- * @date : 2018/9/30 17:25
+ *
+ * 功能描述: 关键字提取工具类
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class KeyWordUtil {
     private Map<String, Object> dictionaryMap;

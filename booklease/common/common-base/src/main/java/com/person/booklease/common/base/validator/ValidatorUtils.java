@@ -12,13 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * hibernate-validator校验工具类
- * <p>
- * 参考文档：http://docs.jboss.org/hibernate/validator/5.4/reference/en-US/html_single/
+ * 功能描述: hibernate-validator校验工具类
  *
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2017-03-15 10:50
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 @Slf4j
 public class ValidatorUtils {

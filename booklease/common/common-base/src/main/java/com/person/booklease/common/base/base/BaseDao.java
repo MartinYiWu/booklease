@@ -1,17 +1,16 @@
 package com.person.booklease.common.base.base;
-
-/**
- * @author : heshuangshuang
- * @date : 2018/1/19 15:14
- */
-
-
 import com.person.booklease.common.base.utils.PageQuery;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
+/**
+ *
+ * 功能描述: 底层基类dao
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
+ */
 public interface BaseDao<T, ID extends Serializable> {
 
     /**

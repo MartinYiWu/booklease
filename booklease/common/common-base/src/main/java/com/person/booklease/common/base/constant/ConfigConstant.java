@@ -1,8 +1,11 @@
 package com.person.booklease.common.base.constant;
 
 /**
- * @author XYQ 2018年9月12日17:32:07
- * 系统参数相关
+ *
+ * 功能描述: 系统参数相关
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public interface ConfigConstant {
     /**

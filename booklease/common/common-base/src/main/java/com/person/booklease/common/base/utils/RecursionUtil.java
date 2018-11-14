@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * 列表递归成树数据
  *
- * @author : heshuangshuang
- * @date : 2018/5/22 9:20
+ * 功能描述: 列表递归成树数据
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class RecursionUtil {
     private final static String DEF_ID_NAME = "getId";

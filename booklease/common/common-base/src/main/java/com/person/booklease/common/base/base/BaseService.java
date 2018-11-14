@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author : heshuangshuang
- * @date : 2018/1/19 15:20
+ *
+ * 功能描述: 底层基类service
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public interface BaseService<T, ID extends Serializable> {
     /**

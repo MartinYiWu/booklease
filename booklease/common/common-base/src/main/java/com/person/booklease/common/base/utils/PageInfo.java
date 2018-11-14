@@ -6,8 +6,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author : HejinYo   hejinyo@gmail.com  2017/8/31 23:27
- * @apiNote :
+ *
+ * 功能描述: 
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class PageInfo<T> implements Serializable {
     private static final long serialVersionUID = 1L;

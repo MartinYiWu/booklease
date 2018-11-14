@@ -1,11 +1,12 @@
 package com.person.booklease.common.base.constant;
 
 /**
- * 系统特殊资源固定ID
- * 用户表，角色表，部门表的ID从1001开始，0-1000规划为系统ID，用于特殊业务需求
  *
- * @author : heshuangshuang
- * @date : 2018/6/14 16:15
+ * 功能描述: 系统特殊资源固定ID
+ *  用户表，角色表，部门表的ID从1001开始，0-1000规划为系统ID，用于特殊业务需求
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public interface SystemId {
     /**

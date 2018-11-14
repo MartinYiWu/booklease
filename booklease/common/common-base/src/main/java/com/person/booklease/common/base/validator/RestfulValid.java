@@ -1,10 +1,15 @@
 package com.person.booklease.common.base.validator;
 
 import javax.validation.GroupSequence;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 
 /**
- * @author : HejinYo   hejinyo@gmail.com
- * @date : 2017/8/25 21:47
+ * 功能描述:
+ *
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 public interface RestfulValid {
     interface GET {

@@ -1,5 +1,6 @@
 package com.person.booklease.common.base.utils;
 
+import lombok.Data;
 import lombok.Getter;
 import org.apache.commons.collections.MapUtils;
 
@@ -7,12 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 分页查询参数
  *
- * @author : heshuangshuang
- * @date : 2018/1/19 14:14
+ * 功能描述: 分页查询参数
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
-@Getter
+@Data
 public class PageQuery extends HashMap<String, Object> {
     //当前页
     private static final String PAGENUM = "pageNum";

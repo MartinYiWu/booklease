@@ -7,9 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author xieyuqing
- * @ description
- * @ date create in 11:33 2018/5/22
+ * 功能描述: 规则校验工具类
+ *
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 public class RegularUtils {
 

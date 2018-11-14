@@ -4,11 +4,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
 /**
- * @author xieyuqing
- * @ description Excel配置注解自定义接口
- * @ date create in 2018/6/5 11:35
+ *
+ * 功能描述:  Excel配置注解自定义接口
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 
 @Retention(RetentionPolicy.RUNTIME)

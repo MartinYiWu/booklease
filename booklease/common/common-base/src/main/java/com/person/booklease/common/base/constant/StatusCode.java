@@ -1,10 +1,11 @@
 package com.person.booklease.common.base.constant;
 
 /**
- * 业务状态码
  *
- * @author : HejinYo   hejinyo@gmail.com
- * @date : 2017/8/5 18:25
+ * 功能描述:  业务状态码
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public enum StatusCode {
     FAILURE(-1, "失败"),

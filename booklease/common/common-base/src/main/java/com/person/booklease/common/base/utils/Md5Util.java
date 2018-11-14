@@ -3,8 +3,12 @@ package com.person.booklease.common.base.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/*
- * MD5 算法
+/**
+ * 功能描述: MD5 算法
+ *
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 public class Md5Util {
 

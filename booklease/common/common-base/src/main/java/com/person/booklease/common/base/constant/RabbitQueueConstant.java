@@ -1,7 +1,11 @@
 package com.person.booklease.common.base.constant;
 
 /**
- * RabbitMq 队列常量
+ *
+ * 功能描述: RabbitMq 队列常量
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public interface RabbitQueueConstant {
 

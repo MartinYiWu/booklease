@@ -4,10 +4,11 @@ package com.person.booklease.common.base.exception;
 import com.person.booklease.common.base.constant.StatusCode;
 
 /**
- * 自定义异常
  *
- * @author : heshuangshuang
- * @date : 2018/3/23 13:25
+ * 功能描述: 自定义异常
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class RRException extends RuntimeException {
     private static final long serialVersionUID = 1L;

@@ -20,8 +20,11 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * @author : heshuangshuang
- * @date : 2018/7/2 17:37
+ * 功能描述:
+ *
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 @Slf4j
 public class RestHttpUtils implements AutoCloseable {

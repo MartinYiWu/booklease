@@ -4,8 +4,11 @@ package com.person.booklease.common.base.constant;
 import com.person.booklease.common.base.utils.StringUtils;
 
 /**
- * @author XYQ
- * 常量
+ * 功能描述: 常量
+ *
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 public class Constant {
     /**

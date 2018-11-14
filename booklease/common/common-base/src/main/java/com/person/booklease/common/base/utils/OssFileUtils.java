@@ -8,9 +8,11 @@ import java.net.URL;
 import java.util.Date;
 
 /**
- * 阿里上传文件工具类
  *
- * @author xyq 2018年9月12日18:10:22
+ * 功能描述: 阿里上传文件工具类
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class OssFileUtils {
 

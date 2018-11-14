@@ -11,8 +11,11 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * @author : heshuangshuang
- * @date : 2018/7/6 12:15
+ *
+ * 功能描述:
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 @Slf4j
 public class RSAUtil {

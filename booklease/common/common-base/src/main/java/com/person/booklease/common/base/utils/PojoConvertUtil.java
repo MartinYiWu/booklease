@@ -18,10 +18,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 拷贝对象，不要在对象类上面注解 @Accessors(chain = true)
  *
- * @author : HejinYo   hejinyo@gmail.com
- * @date : 2017/6/22 21:24
+ * 功能描述: 拷贝对象，不要在对象类上面注解 @Accessors(chain = true)
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class PojoConvertUtil {
     private static Logger logger = LoggerFactory.getLogger(PojoConvertUtil.class);

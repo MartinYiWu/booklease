@@ -17,11 +17,6 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.*;
 
-/**
- * @author xieyuqing
- * @ description
- * @ date create in 2018/6/5 11:37
- */
 @Slf4j
 public class ExcelUtil<T1, T2> implements Serializable {
     private static final long serialVersionUID = 551970754610248636L;

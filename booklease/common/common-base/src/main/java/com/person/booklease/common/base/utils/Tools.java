@@ -9,8 +9,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @author : heshuangshuang
- * @date : 2018/5/28 15:06
+ * 功能描述:
+ *
+ * @author Martin
+ * @version V1.0
+ * @date 2018/11/14
  */
 public class Tools {
     /**

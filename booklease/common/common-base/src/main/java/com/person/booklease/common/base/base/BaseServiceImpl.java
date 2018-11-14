@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author : heshuangshuang
- * @date : 2018/1/19 15:25
- * @Description :实现类（ 泛型：M 是 mapper 对象，T 是实体 ， ID 是主键泛型 ）
+ *
+ * 功能描述: 实现类（ 泛型：M 是 mapper 对象，T 是实体 ， ID 是主键泛型 ）
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 public class BaseServiceImpl<M extends BaseDao<T, ID>, T, ID extends Serializable> implements BaseService<T, ID> {
 

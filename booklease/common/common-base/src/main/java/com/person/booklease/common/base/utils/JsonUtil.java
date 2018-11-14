@@ -8,10 +8,11 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
- * JSONG工具类
+ * 功能描述: JSONG工具类
  *
- * @author : heshuangshuang
- * @date : 2018/5/22 17:05
+ * @author Martin
+ * @version V1.0
+ * @return
  */
 public class JsonUtil {
 

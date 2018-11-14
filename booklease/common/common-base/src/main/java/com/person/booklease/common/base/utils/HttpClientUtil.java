@@ -23,10 +23,11 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * 重构后的HTTP请求工具类，未测试
  *
- * @author heshuangshuang
- * @date : 2018/5/31 13:21
+ * 功能描述: 重构后的HTTP请求工具类，未测试
+ * @author Martin
+ * @date 2018/11/14
+ * @version V1.0
  */
 @Slf4j
 public class HttpClientUtil implements AutoCloseable {
@@ -82,7 +83,7 @@ public class HttpClientUtil implements AutoCloseable {
                 default:
                     String result = EntityUtils.toString(httpEntity, "UTF-8");
                     if (StringUtils.isNotEmpty(result)) {
-                        return com.hqjy.mustang.common.base.utils.JsonUtil.fromJson(result, clazz);
+                        return JsonUtil.fromJson(result, clazz);
                     }
             }
         } catch (IOException e) {
@@ -201,7 +202,7 @@ public class HttpClientUtil implements AutoCloseable {
      * 发送 post请求,带参数
      */
     public <T> T sendHttpPost(String url, Map<String, Object> params, Class<T> clazz) {
-        log.info("sendHttpPost  url:{},param:{}", url, com.hqjy.mustang.common.base.utils.JsonUtil.toJson(params));
+        log.info("sendHttpPost  url:{},param:{}", url, JsonUtil.toJson(params));
         HttpPost httpPost = new HttpPost(url);
         // 创建参数队列      
         List<NameValuePair> list = new ArrayList<>();
