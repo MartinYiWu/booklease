@@ -18,7 +18,6 @@
         <module>common-redis</module>
         <module>common-msmq</module>
         <module>common-web</module>
-        <module>common-base</module>
     </modules>
 
 </project>

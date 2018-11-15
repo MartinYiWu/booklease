@@ -31,22 +31,22 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.generator.model" targetProject="common-generator/src/main/java">
+        <javaModelGenerator targetPackage="com.person.booklease.admin.model.entity" targetProject="modules/booklease-admin/src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="com.generator.dao" targetProject="fly-beetl/src/main/java">
+        <sqlMapGenerator targetPackage="com.person.booklease.admin.mapper" targetProject="modules/booklease-admin/src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.generator.dao" targetProject="fly-beetl/src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.person.booklease.admin.dao" targetProject="modules/booklease-admin/src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- 要生成哪些表-->
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-        <table tableName="`t_user`" domainObjectName="UserEntity"
-               mapperName="UserDao"
+        <table tableName="`t_login_log`" domainObjectName="LoginLogEntity"
+               mapperName="LoginLogDao"
                enableInsert="false"
                enableSelectByPrimaryKey="true"
                enableDeleteByPrimaryKey="false"

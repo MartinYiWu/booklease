@@ -2,6 +2,7 @@ package com.person.booklease.common.base.exception;
 
 
 import com.person.booklease.common.base.constant.StatusCode;
+import org.springframework.stereotype.Component;
 
 /**
  *

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.person.booklease.admin.dao.UserDao">
+  
+  <!-- 实体映射 -->
+  <resultMap id="BaseResultMap" type="com.person.booklease.admin.model.entity.UserEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+  </resultMap>
+  
+  <!-- 表基本列 -->
+  <sql id="Base_Column_List">
+    id, user_account, user_name, nick_name, image, password, phone, sex, user_type, status, 
+    create_time, update_time, last_update_by
+  </sql>
+  
+  <!-- 通用查询sql -->
+  <sql id="Base_Where_SQL">
+    <where>
+		<if test="userAccount != null and !&quot;&quot;.equals(userAccount)">and user_account = #{userAccount}</if>
+		<if test="userName != null and !&quot;&quot;.equals(userName)">and user_name = #{userName}</if>
+		<if test="nickName != null and !&quot;&quot;.equals(nickName)">and nick_name = #{nickName}</if>
+		<if test="image != null and !&quot;&quot;.equals(image)">and image = #{image}</if>
+		<if test="password != null and !&quot;&quot;.equals(password)">and password = #{password}</if>
+		<if test="phone != null and !&quot;&quot;.equals(phone)">and phone = #{phone}</if>
+		<if test="sex != null and !&quot;&quot;.equals(sex)">and sex = #{sex}</if>
+		<if test="userType != null and !&quot;&quot;.equals(userType)">and user_type = #{userType}</if>
+		<if test="status != null and !&quot;&quot;.equals(status)">and status = #{status}</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+		<if test="updateTime != null and !&quot;&quot;.equals(updateTime)">and DATE_FORMAT(update_time,'%Y-%m-%d') = STR_TO_DATE(#{updateTime},'%Y-%m-%d')</if>
+		<if test="lastUpdateBy != null and !&quot;&quot;.equals(lastUpdateBy)">and last_update_by = #{lastUpdateBy}</if>
+	</where>
+  </sql>
+  
+  <!-- 插入一条记录 -->
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != userAccount">user_account, </if>
+			<if test="null != userName">user_name, </if>
+			<if test="null != nickName">nick_name, </if>
+			<if test="null != image">image, </if>
+			<if test="null != password">password, </if>
+			<if test="null != phone">phone, </if>
+			<if test="null != sex">sex, </if>
+			<if test="null != userType">user_type, </if>
+			<if test="null != status">status, </if>
+			<if test="null != createTime">create_time, </if>
+			<if test="null != updateTime">update_time, </if>
+			<if test="null != lastUpdateBy">last_update_by, </if>
+		</trim>
+	values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != userAccount">#{userAccount}, </if>
+			<if test="null != userName">#{userName}, </if>
+			<if test="null != nickName">#{nickName}, </if>
+			<if test="null != image">#{image}, </if>
+			<if test="null != password">#{password}, </if>
+			<if test="null != phone">#{phone}, </if>
+			<if test="null != sex">#{sex}, </if>
+			<if test="null != userType">#{userType}, </if>
+			<if test="null != status">#{status}, </if>
+			<if test="null != createTime">#{createTime}, </if>
+			<if test="null != updateTime">#{updateTime}, </if>
+			<if test="null != lastUpdateBy">#{lastUpdateBy}, </if>
+		</trim>
+  </insert>
+  
+  <!-- 更新一条记录 -->
+  <update id="update">
+    update t_user 
+		<set>
+			<if test="null != userAccount">user_account = #{userAccount}, </if>
+			<if test="null != userName">user_name = #{userName}, </if>
+			<if test="null != nickName">nick_name = #{nickName}, </if>
+			<if test="null != image">image = #{image}, </if>
+			<if test="null != password">password = #{password}, </if>
+			<if test="null != phone">phone = #{phone}, </if>
+			<if test="null != sex">sex = #{sex}, </if>
+			<if test="null != userType">user_type = #{userType}, </if>
+			<if test="null != status">status = #{status}, </if>
+			<if test="null != createTime">create_time = #{createTime}, </if>
+			<if test="null != updateTime">update_time = #{updateTime}, </if>
+			<if test="null != lastUpdateBy">last_update_by = #{lastUpdateBy}, </if>
+		</set>
+		where id = #{id}
+  </update>
+  
+  <!-- 删除给定主键的记录 -->
+  <delete id="delete">
+    delete
+		from t_user
+	where
+		id = #{id}
+  </delete>
+  
+  <!-- 多个主键批量删除记录 -->
+  <delete id="deleteBatch">
+    delete
+		from t_user
+	where
+		id in 
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+  
+  <!-- 多个实体批量删除记录 -->
+  <delete id="deleteList">
+    delete
+		from t_user
+	where
+		id in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item.id}
+		</foreach>
+  </delete>
+  
+  <!-- 主键查找一条记录 -->
+  <select id="findOne" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_user
+	where id = #{id}
+  </select>
+  
+  <!-- 查询多条 -->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_user
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_user
+		<where>
+		<if test="userAccount != null and !&quot;&quot;.equals(userAccount)">and user_account like concat('%',#{userAccount},'%')</if>
+		<if test="userName != null and !&quot;&quot;.equals(userName)">and user_name like concat('%',#{userName},'%')</if>
+		<if test="nickName != null and !&quot;&quot;.equals(nickName)">and nick_name like concat('%',#{nickName},'%')</if>
+		<if test="image != null and !&quot;&quot;.equals(image)">and image like concat('%',#{image},'%')</if>
+		<if test="password != null and !&quot;&quot;.equals(password)">and password like concat('%',#{password},'%')</if>
+		<if test="phone != null and !&quot;&quot;.equals(phone)">and phone like concat('%',#{phone},'%')</if>
+		<if test="sex != null and !&quot;&quot;.equals(sex)">and sex like concat('%',#{sex},'%')</if>
+		<if test="userType != null and !&quot;&quot;.equals(userType)">and user_type like concat('%',#{userType},'%')</if>
+		<if test="status != null and !&quot;&quot;.equals(status)">and status like concat('%',#{status},'%')</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+		<if test="updateTime != null and !&quot;&quot;.equals(updateTime)">and DATE_FORMAT(update_time,'%Y-%m-%d') = STR_TO_DATE(#{updateTime},'%Y-%m-%d')</if>
+		<if test="lastUpdateBy != null and !&quot;&quot;.equals(lastUpdateBy)">and last_update_by like concat('%',#{lastUpdateBy},'%')</if>
+	</where>
+  </select>
+  
+  <!-- 查询记录数量 -->
+  <select id="count" resultType="int">
+    select
+		count(*)
+	from t_user
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 查询记录是否存在 -->
+  <select id="exsit" resultType="boolean">
+    select
+		count(*)
+	from t_user
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+
+</mapper>

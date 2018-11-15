@@ -5,6 +5,7 @@ import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.*;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
+
 public class GenPlugin extends PluginAdapter {
 
     @Override
@@ -459,7 +461,7 @@ public class GenPlugin extends PluginAdapter {
     }
 
     public static void generate() {
-        String config = GenPlugin.class.getClassLoader().getResource("cn/hejinyo/jelly/generator/generator.xml").getFile();
+        String config = GenPlugin.class.getClassLoader().getResource("com/person/booklease/generator/generator.xml").getFile();
         log.info("-------"+config);
         String[] arg = {"-configfile", config, "-overwrite"};
         ShellRunner.main(arg);
