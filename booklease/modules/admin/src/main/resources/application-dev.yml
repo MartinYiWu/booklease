@@ -1,0 +1,123 @@
+spring:
+  profiles: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.104.224.211:3306/booklease?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: Chen1993
+    filters: log4j,wall,mergeStat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    validation-query: SELECT 1 FROM DUAL
+    druid:
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+  jpa:
+    show-sql: true
+  jackson:
+    serialization:
+      #格式化输出
+      indent_output: true
+      #忽略无法转换的对象
+      fail_on_empty_beans: false
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+  data:
+    solr:
+      host: http://47.104.224.211:8983/solr/data_collection
+  #redis配置
+  redis:
+    host: 47.104.224.211
+    port: 6379
+    timeout: 10000
+    password: 123456
+    jedis:
+      pool:
+        max-active: 2000
+        max-idle: 5000
+        max-wait: 10000
+        min-idle: 500
+    database: 1
+  # rabbitmq配置
+  rabbitmq:
+    host: 47.104.224.211
+    port: 5672
+    username: admin
+    password: admin
+    # 支持发布确认
+    publisher-confirms: true
+    # 支持发布返回
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        # 指定最小的消费者数量
+        concurrency: 1
+        # 指定最大的消费者数量
+        max-concurrency: 1
+        # 是否支持重试
+        retry:
+          enabled: true
+## 端口
+server:
+  port: 4420
+  servlet:
+    context-path: /booklease
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+## Mybatis
+mybatis:
+  type-aliases-package: com.person.booklease.admin.model.entity
+  mapper-locations: classpath*:com/person/booklease/admin/mapper/*.xml
+#logging配置
+logging:
+  level.root: info
+  level.com.saliai: debug
+  config: classpath:logback-spring.xml
+  path: D://
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+# 分布式文件系统FDFS配置
+fdfs:
+  so-timeout: 1500 #socket连接超时时长
+  connect-timeout: 600 #连接tracker服务器超时时长
+  res-host: 47.104.224.211
+  storage-port: 9999
+  thumb-image: #缩略图生成参数，可选
+    width: 150
+    height: 150
+  tracker-list: 47.104.224.211:22122
+##自定义常量
+saliai-constants:
+  solrUrl: http://47.104.224.211:8983/solr/data_collection
+  solrCollection: data_collection
+  smallHighlightPre: <text style="color:red">
+  smallHighlightPost: </text>
+  commonHighlightPre: <font color='red'>
+  commonHighlightPost: </font>

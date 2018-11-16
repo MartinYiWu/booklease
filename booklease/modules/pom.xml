@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>booklease-admin</module>
+        <module>admin</module>
     </modules>
 
     <properties>

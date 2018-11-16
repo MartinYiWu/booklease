@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.person.booklease.admin.dao.BookImageDao">
+  
+  <!-- 实体映射 -->
+  <resultMap id="BaseResultMap" type="com.person.booklease.admin.model.entity.BookImageEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="book_number" jdbcType="VARCHAR" property="bookNumber" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="image_type" jdbcType="VARCHAR" property="imageType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+  </resultMap>
+  
+  <!-- 表基本列 -->
+  <sql id="Base_Column_List">
+    id, book_number, image_path, image_type, create_time, update_time, last_update_by
+  </sql>
+  
+  <!-- 通用查询sql -->
+  <sql id="Base_Where_SQL">
+    <where>
+		<if test="id != null and !&quot;&quot;.equals(id)">and id = #{id}</if>
+		<if test="bookNumber != null and !&quot;&quot;.equals(bookNumber)">and book_number = #{bookNumber}</if>
+		<if test="imagePath != null and !&quot;&quot;.equals(imagePath)">and image_path = #{imagePath}</if>
+		<if test="imageType != null and !&quot;&quot;.equals(imageType)">and image_type = #{imageType}</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+		<if test="updateTime != null and !&quot;&quot;.equals(updateTime)">and DATE_FORMAT(update_time,'%Y-%m-%d') = STR_TO_DATE(#{updateTime},'%Y-%m-%d')</if>
+		<if test="lastUpdateBy != null and !&quot;&quot;.equals(lastUpdateBy)">and last_update_by = #{lastUpdateBy}</if>
+	</where>
+  </sql>
+  
+  <!-- 插入一条记录 -->
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    insert into t_book_image
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != id">id, </if>
+			<if test="null != bookNumber">book_number, </if>
+			<if test="null != imagePath">image_path, </if>
+			<if test="null != imageType">image_type, </if>
+			<if test="null != createTime">create_time, </if>
+			<if test="null != updateTime">update_time, </if>
+			<if test="null != lastUpdateBy">last_update_by, </if>
+		</trim>
+	values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != id">#{id}, </if>
+			<if test="null != bookNumber">#{bookNumber}, </if>
+			<if test="null != imagePath">#{imagePath}, </if>
+			<if test="null != imageType">#{imageType}, </if>
+			<if test="null != createTime">#{createTime}, </if>
+			<if test="null != updateTime">#{updateTime}, </if>
+			<if test="null != lastUpdateBy">#{lastUpdateBy}, </if>
+		</trim>
+  </insert>
+  
+  <!-- 更新一条记录 -->
+  <update id="update">
+    update t_book_image 
+		<set>
+			<if test="null != id">id = #{id}, </if>
+			<if test="null != bookNumber">book_number = #{bookNumber}, </if>
+			<if test="null != imagePath">image_path = #{imagePath}, </if>
+			<if test="null != imageType">image_type = #{imageType}, </if>
+			<if test="null != createTime">create_time = #{createTime}, </if>
+			<if test="null != updateTime">update_time = #{updateTime}, </if>
+			<if test="null != lastUpdateBy">last_update_by = #{lastUpdateBy}, </if>
+		</set>
+		where id = #{id}
+  </update>
+  
+  <!-- 删除给定主键的记录 -->
+  <delete id="delete">
+    delete
+		from t_book_image
+	where
+		id = #{id}
+  </delete>
+  
+  <!-- 多个主键批量删除记录 -->
+  <delete id="deleteBatch">
+    delete
+		from t_book_image
+	where
+		id in 
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+  
+  <!-- 多个实体批量删除记录 -->
+  <delete id="deleteList">
+    delete
+		from t_book_image
+	where
+		id in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item.id}
+		</foreach>
+  </delete>
+  
+  <!-- 主键查找一条记录 -->
+  <select id="findOne" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_book_image
+	where id = #{id}
+  </select>
+  
+  <!-- 查询多条 -->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_book_image
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_book_image
+		<where>
+		<if test="id != null and !&quot;&quot;.equals(id)">and id = #{id}</if>
+		<if test="bookNumber != null and !&quot;&quot;.equals(bookNumber)">and book_number like concat('%',#{bookNumber},'%')</if>
+		<if test="imagePath != null and !&quot;&quot;.equals(imagePath)">and image_path like concat('%',#{imagePath},'%')</if>
+		<if test="imageType != null and !&quot;&quot;.equals(imageType)">and image_type like concat('%',#{imageType},'%')</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+		<if test="updateTime != null and !&quot;&quot;.equals(updateTime)">and DATE_FORMAT(update_time,'%Y-%m-%d') = STR_TO_DATE(#{updateTime},'%Y-%m-%d')</if>
+		<if test="lastUpdateBy != null and !&quot;&quot;.equals(lastUpdateBy)">and last_update_by like concat('%',#{lastUpdateBy},'%')</if>
+	</where>
+  </select>
+  
+  <!-- 查询记录数量 -->
+  <select id="count" resultType="int">
+    select
+		count(*)
+	from t_book_image
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 查询记录是否存在 -->
+  <select id="exsit" resultType="boolean">
+    select
+		count(*)
+	from t_book_image
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+
+</mapper>

@@ -1,0 +1,35 @@
+info:
+  app:
+    name: booklease-admin
+    version: 1.0
+spring:
+  application:
+    # 应用名称
+    name: booklease-admin
+  # 环境 dev|test|pro
+  profiles:
+    active: dev
+eureka:
+  client:
+    register-with-eureka: true #将此项目注册到Eureka服务
+    serviceUrl:
+      defaultZone: http://transfer:password@localhost:8000/eureka
+jwt-token:
+  # token有效时长，单位秒 默认一天 86400s = 3600*24
+  expire: 86400
+  # 续命时长 默认 3600s
+  prolong: 7200
+
+pagehelper:
+  helperDialect: mysql
+  page-size-zero: true
+  reasonable: true
+  params: pageNum=start;pageSize=limit;pageSizeZero=zero;reasonable=heli;count=contsql
+  row-bounds-with-count: true
+
+# Feign 开启 Hystrix
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 5000

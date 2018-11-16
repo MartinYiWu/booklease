@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.person.booklease.admin.dao.BorrowCommentDao">
+  
+  <!-- 实体映射 -->
+  <resultMap id="BaseResultMap" type="com.person.booklease.admin.model.entity.BorrowCommentEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="book_number" jdbcType="VARCHAR" property="bookNumber" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  <!-- 表基本列 -->
+  <sql id="Base_Column_List">
+    id, user_id, content, book_number, create_time, status
+  </sql>
+  
+  <!-- 通用查询sql -->
+  <sql id="Base_Where_SQL">
+    <where>
+		<if test="userId != null and !&quot;&quot;.equals(userId)">and user_id = #{userId}</if>
+		<if test="content != null and !&quot;&quot;.equals(content)">and content = #{content}</if>
+		<if test="bookNumber != null and !&quot;&quot;.equals(bookNumber)">and book_number = #{bookNumber}</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+		<if test="status != null and !&quot;&quot;.equals(status)">and status = #{status}</if>
+	</where>
+  </sql>
+  
+  <!-- 插入一条记录 -->
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    insert into t_borrow_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != userId">user_id, </if>
+			<if test="null != content">content, </if>
+			<if test="null != bookNumber">book_number, </if>
+			<if test="null != createTime">create_time, </if>
+			<if test="null != status">status, </if>
+		</trim>
+	values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != userId">#{userId}, </if>
+			<if test="null != content">#{content}, </if>
+			<if test="null != bookNumber">#{bookNumber}, </if>
+			<if test="null != createTime">#{createTime}, </if>
+			<if test="null != status">#{status}, </if>
+		</trim>
+  </insert>
+  
+  <!-- 更新一条记录 -->
+  <update id="update">
+    update t_borrow_comment 
+		<set>
+			<if test="null != userId">user_id = #{userId}, </if>
+			<if test="null != content">content = #{content}, </if>
+			<if test="null != bookNumber">book_number = #{bookNumber}, </if>
+			<if test="null != createTime">create_time = #{createTime}, </if>
+			<if test="null != status">status = #{status}, </if>
+		</set>
+		where id = #{id}
+  </update>
+  
+  <!-- 删除给定主键的记录 -->
+  <delete id="delete">
+    delete
+		from t_borrow_comment
+	where
+		id = #{id}
+  </delete>
+  
+  <!-- 多个主键批量删除记录 -->
+  <delete id="deleteBatch">
+    delete
+		from t_borrow_comment
+	where
+		id in 
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+  
+  <!-- 多个实体批量删除记录 -->
+  <delete id="deleteList">
+    delete
+		from t_borrow_comment
+	where
+		id in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item.id}
+		</foreach>
+  </delete>
+  
+  <!-- 主键查找一条记录 -->
+  <select id="findOne" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_borrow_comment
+	where id = #{id}
+  </select>
+  
+  <!-- 查询多条 -->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_borrow_comment
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_borrow_comment
+		<where>
+		<if test="userId != null and !&quot;&quot;.equals(userId)">and user_id = #{userId}</if>
+		<if test="content != null and !&quot;&quot;.equals(content)">and content like concat('%',#{content},'%')</if>
+		<if test="bookNumber != null and !&quot;&quot;.equals(bookNumber)">and book_number like concat('%',#{bookNumber},'%')</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+		<if test="status != null and !&quot;&quot;.equals(status)">and status like concat('%',#{status},'%')</if>
+	</where>
+  </select>
+  
+  <!-- 查询记录数量 -->
+  <select id="count" resultType="int">
+    select
+		count(*)
+	from t_borrow_comment
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 查询记录是否存在 -->
+  <select id="exsit" resultType="boolean">
+    select
+		count(*)
+	from t_borrow_comment
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.person.booklease.admin.dao.DictionDao">
+  
+  <!-- 实体映射 -->
+  <resultMap id="BaseResultMap" type="com.person.booklease.admin.model.entity.DictionEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dicti_name" jdbcType="VARCHAR" property="dictiName" />
+    <result column="dicti_group" jdbcType="VARCHAR" property="dictiGroup" />
+    <result column="dicti_decs" jdbcType="VARCHAR" property="dictiDecs" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createt_time" jdbcType="TIMESTAMP" property="createtTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+  </resultMap>
+  
+  <!-- 表基本列 -->
+  <sql id="Base_Column_List">
+    id, dicti_name, dicti_group, dicti_decs, sort, status, createt_time, update_time, 
+    last_update_by
+  </sql>
+  
+  <!-- 通用查询sql -->
+  <sql id="Base_Where_SQL">
+    <where>
+		<if test="dictiName != null and !&quot;&quot;.equals(dictiName)">and dicti_name = #{dictiName}</if>
+		<if test="dictiGroup != null and !&quot;&quot;.equals(dictiGroup)">and dicti_group = #{dictiGroup}</if>
+		<if test="dictiDecs != null and !&quot;&quot;.equals(dictiDecs)">and dicti_decs = #{dictiDecs}</if>
+		<if test="sort != null and !&quot;&quot;.equals(sort)">and sort = #{sort}</if>
+		<if test="status != null and !&quot;&quot;.equals(status)">and status = #{status}</if>
+		<if test="createtTime != null and !&quot;&quot;.equals(createtTime)">and DATE_FORMAT(createt_time,'%Y-%m-%d') = STR_TO_DATE(#{createtTime},'%Y-%m-%d')</if>
+		<if test="updateTime != null and !&quot;&quot;.equals(updateTime)">and DATE_FORMAT(update_time,'%Y-%m-%d') = STR_TO_DATE(#{updateTime},'%Y-%m-%d')</if>
+		<if test="lastUpdateBy != null and !&quot;&quot;.equals(lastUpdateBy)">and last_update_by = #{lastUpdateBy}</if>
+	</where>
+  </sql>
+  
+  <!-- 插入一条记录 -->
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    insert into t_diction
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != dictiName">dicti_name, </if>
+			<if test="null != dictiGroup">dicti_group, </if>
+			<if test="null != dictiDecs">dicti_decs, </if>
+			<if test="null != sort">sort, </if>
+			<if test="null != status">status, </if>
+			<if test="null != createtTime">createt_time, </if>
+			<if test="null != updateTime">update_time, </if>
+			<if test="null != lastUpdateBy">last_update_by, </if>
+		</trim>
+	values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != dictiName">#{dictiName}, </if>
+			<if test="null != dictiGroup">#{dictiGroup}, </if>
+			<if test="null != dictiDecs">#{dictiDecs}, </if>
+			<if test="null != sort">#{sort}, </if>
+			<if test="null != status">#{status}, </if>
+			<if test="null != createtTime">#{createtTime}, </if>
+			<if test="null != updateTime">#{updateTime}, </if>
+			<if test="null != lastUpdateBy">#{lastUpdateBy}, </if>
+		</trim>
+  </insert>
+  
+  <!-- 更新一条记录 -->
+  <update id="update">
+    update t_diction 
+		<set>
+			<if test="null != dictiName">dicti_name = #{dictiName}, </if>
+			<if test="null != dictiGroup">dicti_group = #{dictiGroup}, </if>
+			<if test="null != dictiDecs">dicti_decs = #{dictiDecs}, </if>
+			<if test="null != sort">sort = #{sort}, </if>
+			<if test="null != status">status = #{status}, </if>
+			<if test="null != createtTime">createt_time = #{createtTime}, </if>
+			<if test="null != updateTime">update_time = #{updateTime}, </if>
+			<if test="null != lastUpdateBy">last_update_by = #{lastUpdateBy}, </if>
+		</set>
+		where id = #{id}
+  </update>
+  
+  <!-- 删除给定主键的记录 -->
+  <delete id="delete">
+    delete
+		from t_diction
+	where
+		id = #{id}
+  </delete>
+  
+  <!-- 多个主键批量删除记录 -->
+  <delete id="deleteBatch">
+    delete
+		from t_diction
+	where
+		id in 
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+  
+  <!-- 多个实体批量删除记录 -->
+  <delete id="deleteList">
+    delete
+		from t_diction
+	where
+		id in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item.id}
+		</foreach>
+  </delete>
+  
+  <!-- 主键查找一条记录 -->
+  <select id="findOne" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_diction
+	where id = #{id}
+  </select>
+  
+  <!-- 查询多条 -->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_diction
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_diction
+		<where>
+		<if test="dictiName != null and !&quot;&quot;.equals(dictiName)">and dicti_name like concat('%',#{dictiName},'%')</if>
+		<if test="dictiGroup != null and !&quot;&quot;.equals(dictiGroup)">and dicti_group like concat('%',#{dictiGroup},'%')</if>
+		<if test="dictiDecs != null and !&quot;&quot;.equals(dictiDecs)">and dicti_decs like concat('%',#{dictiDecs},'%')</if>
+		<if test="sort != null and !&quot;&quot;.equals(sort)">and sort = #{sort}</if>
+		<if test="status != null and !&quot;&quot;.equals(status)">and status = #{status}</if>
+		<if test="createtTime != null and !&quot;&quot;.equals(createtTime)">and DATE_FORMAT(createt_time,'%Y-%m-%d') = STR_TO_DATE(#{createtTime},'%Y-%m-%d')</if>
+		<if test="updateTime != null and !&quot;&quot;.equals(updateTime)">and DATE_FORMAT(update_time,'%Y-%m-%d') = STR_TO_DATE(#{updateTime},'%Y-%m-%d')</if>
+		<if test="lastUpdateBy != null and !&quot;&quot;.equals(lastUpdateBy)">and last_update_by like concat('%',#{lastUpdateBy},'%')</if>
+	</where>
+  </select>
+  
+  <!-- 查询记录数量 -->
+  <select id="count" resultType="int">
+    select
+		count(*)
+	from t_diction
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 查询记录是否存在 -->
+  <select id="exsit" resultType="boolean">
+    select
+		count(*)
+	from t_diction
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+
+</mapper>

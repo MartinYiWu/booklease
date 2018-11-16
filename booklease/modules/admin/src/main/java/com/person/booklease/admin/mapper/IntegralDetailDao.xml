@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.person.booklease.admin.dao.IntegralDetailDao">
+  
+  <!-- 实体映射 -->
+  <resultMap id="BaseResultMap" type="com.person.booklease.admin.model.entity.IntegralDetailEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="integral_type" jdbcType="INTEGER" property="integralType" />
+    <result column="integral_score" jdbcType="INTEGER" property="integralScore" />
+    <result column="sorce" jdbcType="VARCHAR" property="sorce" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  
+  <!-- 表基本列 -->
+  <sql id="Base_Column_List">
+    id, user_id, integral_type, integral_score, sorce, message, create_time
+  </sql>
+  
+  <!-- 通用查询sql -->
+  <sql id="Base_Where_SQL">
+    <where>
+		<if test="userId != null and !&quot;&quot;.equals(userId)">and user_id = #{userId}</if>
+		<if test="integralType != null and !&quot;&quot;.equals(integralType)">and integral_type = #{integralType}</if>
+		<if test="integralScore != null and !&quot;&quot;.equals(integralScore)">and integral_score = #{integralScore}</if>
+		<if test="sorce != null and !&quot;&quot;.equals(sorce)">and sorce = #{sorce}</if>
+		<if test="message != null and !&quot;&quot;.equals(message)">and message = #{message}</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+	</where>
+  </sql>
+  
+  <!-- 插入一条记录 -->
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    insert into t_integral_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != userId">user_id, </if>
+			<if test="null != integralType">integral_type, </if>
+			<if test="null != integralScore">integral_score, </if>
+			<if test="null != sorce">sorce, </if>
+			<if test="null != message">message, </if>
+			<if test="null != createTime">create_time, </if>
+		</trim>
+	values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != userId">#{userId}, </if>
+			<if test="null != integralType">#{integralType}, </if>
+			<if test="null != integralScore">#{integralScore}, </if>
+			<if test="null != sorce">#{sorce}, </if>
+			<if test="null != message">#{message}, </if>
+			<if test="null != createTime">#{createTime}, </if>
+		</trim>
+  </insert>
+  
+  <!-- 更新一条记录 -->
+  <update id="update">
+    update t_integral_detail 
+		<set>
+			<if test="null != userId">user_id = #{userId}, </if>
+			<if test="null != integralType">integral_type = #{integralType}, </if>
+			<if test="null != integralScore">integral_score = #{integralScore}, </if>
+			<if test="null != sorce">sorce = #{sorce}, </if>
+			<if test="null != message">message = #{message}, </if>
+			<if test="null != createTime">create_time = #{createTime}, </if>
+		</set>
+		where id = #{id}
+  </update>
+  
+  <!-- 删除给定主键的记录 -->
+  <delete id="delete">
+    delete
+		from t_integral_detail
+	where
+		id = #{id}
+  </delete>
+  
+  <!-- 多个主键批量删除记录 -->
+  <delete id="deleteBatch">
+    delete
+		from t_integral_detail
+	where
+		id in 
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  </delete>
+  
+  <!-- 多个实体批量删除记录 -->
+  <delete id="deleteList">
+    delete
+		from t_integral_detail
+	where
+		id in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item.id}
+		</foreach>
+  </delete>
+  
+  <!-- 主键查找一条记录 -->
+  <select id="findOne" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_integral_detail
+	where id = #{id}
+  </select>
+  
+  <!-- 查询多条 -->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_integral_detail
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_List" />
+	from t_integral_detail
+		<where>
+		<if test="userId != null and !&quot;&quot;.equals(userId)">and user_id = #{userId}</if>
+		<if test="integralType != null and !&quot;&quot;.equals(integralType)">and integral_type = #{integralType}</if>
+		<if test="integralScore != null and !&quot;&quot;.equals(integralScore)">and integral_score = #{integralScore}</if>
+		<if test="sorce != null and !&quot;&quot;.equals(sorce)">and sorce like concat('%',#{sorce},'%')</if>
+		<if test="message != null and !&quot;&quot;.equals(message)">and message like concat('%',#{message},'%')</if>
+		<if test="createTime != null and !&quot;&quot;.equals(createTime)">and DATE_FORMAT(create_time,'%Y-%m-%d') = STR_TO_DATE(#{createTime},'%Y-%m-%d')</if>
+	</where>
+  </select>
+  
+  <!-- 查询记录数量 -->
+  <select id="count" resultType="int">
+    select
+		count(*)
+	from t_integral_detail
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+  <!-- 查询记录是否存在 -->
+  <select id="exsit" resultType="boolean">
+    select
+		count(*)
+	from t_integral_detail
+		<include refid="Base_Where_SQL" />
+  </select>
+  
+
+</mapper>
